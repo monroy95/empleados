@@ -1,0 +1,10 @@
+<h1>Probando CreateView</h1>
+
+<form method="post">
+    {% csrf_token %} {{ form.as_p }}
+
+    <button type="submit">AGREGAR</button>
+</form>
+<!--
+<label for="prueba">Prueba:</label>
+<input type="text" name="prueba" id="prueba" placeholder="Ingrese texto" /> -->

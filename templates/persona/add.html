@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Crear Empleado{% endblock title%}
+{% block contenido %}
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Crear Empleado</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} {{ form.as_p }}
+
+            <button type="submit" class="button success">REGISTRAR</button>
+        </form>
+
+    </div>
+</div>
+{% endblock contenido %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ persona.first_name }}{% endblock title%}
+{% block contenido %}
+{% include "includes/header.html" %}
+
+
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center">
+        <h1 class="cell">Detalles de empleado - {{ titulo }}</h1>
+
+        <!-- {{ object }} -->
+        <!-- Tambien se puede usar el nombre del modelo pero en minuscula -->
+        <!-- {{ persona }} -->
+
+        <div class="card cell large-4" style="width: 300px;">
+            <div class="card-divider">
+                {{ persona.first_name }} {{ persona.last_name }}
+            </div>
+            {% if persona.avatar %}
+            <img src="{{ persona.avatar.url }}">
+            {% else %}
+            <img src="{% static 'img/avatar.png' %}">
+            {% endif %}
+            <div class="card-section">
+                <p class="cell">{{ persona.first_name }}</p>
+                <p class="cell">{{ persona.last_name }}</p>
+                <p class="cell">{{ persona.departamento.short_name }}</p>
+                <p><span class="label">HABILIDADES</span>
+                    <ul class="vertical-menu">
+                        {% for h in persona.habilidades.all %}
+                        <li>{{ h.habilidad }}</li>
+                        {% endfor %}
+                    </ul>
+                </p>
+                <!-- <p class="cell">{{ persona.habilidades }}</p> -->
+                <p class="cell">{{ persona.get_job_display }}</p>
+                <p class="cell">{{ persona.hoja_vida }}</p>
+            </div>
+          </div>
+
+    </div>
+</div>
+{% endblock contenido %}

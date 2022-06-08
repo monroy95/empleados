@@ -1,0 +1,9 @@
+<h1>Filtrado por Job</h1>
+
+{{ object_list }}
+
+<ul>
+    {% for emp in object_list %}
+    <li>{{ emp }}</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,20 @@
+<h1>Buscar por palabra clave</h1>
+
+<form method="get">
+    {% csrf_token %}
+    <input
+        type="text"
+        name="keyword"
+        id="keyword"
+        placeholder="Palabra clave"
+    />
+    <input type="submit" value="Buscar" />
+</form>
+
+{{ empleados }}
+
+<ul>
+    {% for empleado in empleados %}
+    <li>{{ empleado.first_name }}</li>
+    {% endfor %}
+</ul>

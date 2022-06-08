@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Actualizar Empleado{% endblock title%}
+{% block contenido %}
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Registrar nuevo departamento</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <h3>Datos Empleado</h3>
+            <p>{{ form.nombre }}</p>
+            <p>{{ form.apellidos }}</p>
+
+            <h3>Departamento</h3>
+            <p>{{ form.departamento }}</p>
+            <p>{{ form.nombre_corto }}</p>
+
+            <!-- {{ form.as_p }} -->
+
+            <button type="submit" class="button success">GUARDAR</button>
+        </form>
+
+    </div>
+</div>
+{% endblock contenido %}

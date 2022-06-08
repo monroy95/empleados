@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Listado Empleados{% endblock title%}
+{% block contenido %}
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Lista de Empleados</h1>
+                <div class="cell">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="25">ID</th>
+                        <th width="auto">NOMBRES</th>
+                        <th width="auto">APELLIDOS</th>
+                        <th width="auto">DEPARTAMENTO</th>
+                        <th width="80"></th>
+                        <th width="80"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in lista_empleados %}
+                    <tr>
+                        <td>{{ empleado.id }}</td>
+                        <td>{{ empleado.first_name}}</td>
+                        <td>{{ empleado.last_name }}</td>
+                        <td>{{ empleado.departamento }}</td>
+                        <td>
+                            <a
+                                type="button"
+                                class="success button"
+                                href="{% url 'empleados_app:modificar_empleado' empleado.id %}"
+                            >
+                                Editar
+                            </a>
+
+                        </td>
+                        <td>
+                            <a
+                                type="button"
+                                class="alert button"
+                                href="{% url 'empleados_app:eliminar_empleado' empleado.id %}"
+                            >
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cell">
+            {% if is_paginated %}
+            <nav aria-label="Pagination">
+                <ul class="pagination text-center">
+                    <!-- Validacion atras -->
+
+                    {% if page_obj.has_previous %}
+                        <li class="pagination-previous">
+                            <a
+                                class="enabled"
+                                href="?page={{ page_obj.previous_page_number }}"
+                                >Atras</a
+                            >
+                        </li>
+                    {% else %}
+                        <li class="pagination-previous disabled">
+                            <a class="disabled">Atras</a>
+                        </li>
+                    {% endif %}
+
+                    {% for pagina in paginator.page_range %}
+
+                        {% if pagina == page_obj.number %}
+                            <li class="current">
+                                <span class="show-for-sr">You're on page</span> {{ pagina }}
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="?page={{pagina}}">{{ pagina }}</a>
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="pagination-next">
+                            <a href="?page={{ page_obj.next_page_number }}"
+                                >Siguiente</a
+                            >
+                        </li>
+                    {% else %}
+                        <li class="pagination-next disabled">
+                            <a class="disabled">Siguiente</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
